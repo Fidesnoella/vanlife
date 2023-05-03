@@ -2,7 +2,7 @@ const App = () => {
 
   return (
     <>
-      <p className="text-center text-2xl">Hello React Router</p>
+      <p className="text-center text-2xl py-20">Hello React Router</p>
     </>
   )
 }
