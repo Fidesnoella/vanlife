@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import VansCard from "../components/cards/Van"
+import VansCard from "../../components/cards/Van"
 import { Link } from "react-router-dom";
 
 const Vans = () => {
