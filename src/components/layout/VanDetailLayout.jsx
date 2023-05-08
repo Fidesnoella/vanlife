@@ -34,7 +34,7 @@ const VanDetailLayout = () => {
                             ${vanData?.price}</span>/day</p>
                     </div>
                 </div>
-                <ul className="flex flex-wrap gap-4 sm:gap-8 text-[#4D4D4D] text-lg sm:text-xl font-semibold leading-6 cursor-pointer pt-44">
+                <ul className="flex flex-wrap gap-4 sm:gap-8 text-[#4D4D4D] text-lg sm:text-xl font-semibold leading-6 cursor-pointer pt-40 sm:pt-0">
                     <NavLink to="." end className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
                         <li className="hover:text-[#161616] hover:underline">Details</li>
                     </NavLink>
