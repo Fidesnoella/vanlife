@@ -27,8 +27,8 @@ const Vans = () => {
                     {
                         vans.map((van) => {
                             return (
-                                <Link to={`/vans/${van.id}`}>
-                                    <VansCard key={van.id} title={van.name} img={van.imageUrl} price={van.price}
+                                <Link to={`/vans/${van.id}`} key={van.id}>
+                                    <VansCard title={van.name} img={van.imageUrl} price={van.price}
                                         text={van.type.charAt(0).toUpperCase().concat(van.type.slice(1))} />
                                 </Link>
                             )
