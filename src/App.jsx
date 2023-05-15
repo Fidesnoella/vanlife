@@ -14,6 +14,7 @@ import VanDetailLayout from './components/layout/VanDetailLayout'
 import VanInfo from './pages/Host/VanInfo'
 import VanPrice from './pages/Host/VanPrice'
 import VanPhotos from './pages/Host/VanPhotos'
+import Notfound from './pages/Notfound'
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
             </Route>
             <Route path='reviews' element={<Reviews />} />
           </Route>
+          <Route path="*" element={<Notfound />} />
         </Route>
       </Routes>
     </BrowserRouter>

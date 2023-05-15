@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
 
 const VanDetail = () => {
     const params = useParams()
+    const location = useLocation()
     const [van, setVan] = useState(null)
 
     useEffect(() => {
@@ -12,12 +13,17 @@ const VanDetail = () => {
             .then(data => setVan(data.vans))
     }, [params.id])
 
+    const search = location.state?.search || ""
+    const type = location.state?.type || "all"
+
     return (
         <main className="max-w-7xl container mx-auto py-20">
             {van ?
                 <div className="flex flex-col w-full mx-auto gap-6 max-w-[70rem] px-4">
-                    <Link to={"/vans"}>
-                        <h1 className="flex gap-2 text-[#4D4D4D] text-base sm:text-lg font-semibold leading-6 underline hover:no-underline cursor-pointer items-center"><FaArrowLeft />Back to all vans</h1>
+                    <Link to={`..${search}`} relative="path">
+                        <h1 className="flex gap-2 text-[#4D4D4D] text-base sm:text-lg font-semibold leading-6 underline hover:no-underline cursor-pointer items-center"><FaArrowLeft />
+                            Back to {type} vans
+                        </h1>
                     </Link>
                     <img src={van.imageUrl} alt="vans" className="h-[32rem] rounded-md object-cover" />
                     <button className={`text-[#FFEAD0] font-semibold rounded-md text-base sm:text-lg py-2 px-4 items-start

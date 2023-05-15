@@ -18,7 +18,7 @@ const Vans = () => {
                 <div className="flex flex-col gap-3 mt-6">
                     {
                         vans.map((van, index) =>
-                            <Link to={`/host/vans/${van.id}`} key={index}>
+                            <Link to={van.id} key={index}>
                                 <div className="bg-white text-black p-6 flex flex-col sm:flex-row items-center gap-2">
                                     <img src={van.imageUrl} alt="" className="rounded-md w-24 sm:w-28" />
                                     <div className="flex flex-col gap-1">

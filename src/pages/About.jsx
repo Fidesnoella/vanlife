@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import person from "../assets/image 55.png"
 
 const About = () => {
@@ -18,7 +19,7 @@ const About = () => {
                     <div className="flex flex-col gap-6 mx-auto justify-center items-center">
                         <h1 className="text-2xl sm:text-3xl leading-8 font-bold text-center">Your destination is waiting.<br />
                             Your van is ready.</h1>
-                        <button className="font-bold text-base sm:text-lg py-3 px-6 bg-[#161616] rounded-lg text-white hover:bg-opacity-90">Explore our vans</button>
+                        <Link to="/vans" className="font-bold text-base sm:text-lg py-3 px-6 bg-[#161616] rounded-lg text-white hover:bg-opacity-90">Explore our vans</Link>
                     </div>
                 </div>
             </div>
