@@ -1,29 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import VansCard from "../../components/cards/Van"
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { getVans } from "../../../api";
 
+export function loader() {
+    return getVans()
+}
+
 const Vans = () => {
-    const [vans, setVans] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-
-    useEffect(() => {
-        async function loadVans() {
-            setLoading(true)
-            try {
-                const data = await getVans()
-                setVans(data)
-            } catch (err) {
-                setError(err)
-            } finally {
-                setLoading(false)
-            }
-
-        }
-        loadVans()
-    }, [])
+    const vans = useLoaderData()
 
     const typefFilter = searchParams.get("type")
 
@@ -48,10 +35,6 @@ const Vans = () => {
             }
             return prevParams
         })
-    }
-
-    if (loading) {
-        return <h1 className="max-w-7xl mx-auto  container p-20 text-2xl font-bold">Loading...</h1>
     }
 
     if (error) {
