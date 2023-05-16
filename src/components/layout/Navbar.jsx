@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import avatar from "../../assets/Icon.svg"
 
 const Navbar = () => {
     return (
@@ -7,15 +8,18 @@ const Navbar = () => {
                 <NavLink to="/">
                     <h1 className="font-black text-[1.625rem] leading-10 cursor-pointer text-xl sm:text-2xl">#VANLIFE</h1>
                 </NavLink>
-                <ul className="flex gap-4 sm:gap-8 text-[#4D4D4D] text-lg sm:text-xl font-semibold leading-6 cursor-pointer">
-                    <NavLink to="/host" className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
+                <ul className="flex items-center gap-4 sm:gap-8 text-[#4D4D4D] text-lg sm:text-xl font-semibold leading-6 cursor-pointer">
+                    <NavLink to="host" className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
                         <li className="hover:text-[#161616] hover:underline">Host</li>
                     </NavLink>
-                    <NavLink to="/about" className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
+                    <NavLink to="about" className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
                         <li className="hover:text-[#161616] hover:underline">About</li>
                     </NavLink>
-                    <NavLink to="/vans" className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
+                    <NavLink to="vans" className={({ isActive }) => isActive ? "text-[#161616] underline" : ""}>
                         <li className="hover:text-[#161616] hover:underline">Vans</li>
+                    </NavLink>
+                    <NavLink to="login">
+                        <img src={avatar} alt="avatar" className="hover:bg-[#f5e0c7] p-2 rounded-full" />
                     </NavLink>
                 </ul>
             </div>
