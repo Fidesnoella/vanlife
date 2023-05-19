@@ -1,7 +1,7 @@
 import { useState } from "react";
 import VansCard from "../../components/cards/Van"
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
-import { getVans } from "../../../api";
+import { getVans } from "../../api";
 
 export function loader() {
     return getVans()

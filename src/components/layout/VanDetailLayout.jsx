@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
+import { getHostVans } from "../../api";
+import { requireAuth } from "../../utils";
 
+export async function loader({ params }) {
+    await requireAuth();
+    return getHostVans(params.id)
+}
 
 const VanDetailLayout = () => {
-    const params = useParams()
-    const [van, setVan] = useState(null)
-
-    useEffect(() => {
-        fetch(`/api/host/vans/${params.id}`)
-            .then(response => response.json())
-            .then(data => setVan(data.vans))
-    }, [params.id])
-
-    const vanData = van ? van[0] : null
+    const vanData = useLoaderData()
 
     return (
         <main className="max-w-7xl mx-auto container px-4 xl:px-0">
