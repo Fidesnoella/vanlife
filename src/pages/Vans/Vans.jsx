@@ -1,30 +1,18 @@
+import { Suspense } from "react";
 import { useState } from "react";
 import VansCard from "../../components/cards/Van"
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { Await, Link, defer, useLoaderData, useSearchParams } from "react-router-dom";
 import { getVans } from "../../api";
 
 export function loader() {
-    return getVans()
+    return defer({ vans: getVans() });
 }
 
 const Vans = () => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [error, setError] = useState(null)
-    const vans = useLoaderData()
+    const dataPromise = useLoaderData()
 
     const typefFilter = searchParams.get("type")
-
-    const displayedVans = typefFilter ? vans.filter(van => van.type === typefFilter) : vans;
-
-    if (typefFilter && displayedVans.length === 0) {
-        return (
-            <div className="p-20 flex flex-col gap-5" >
-                <p className="text-2xl">No vans found for the specified type</p>
-                <Link to="/vans" className="bg-[#FF8C38] rounded-lg hover:bg-[#f8a56b] py-2 
-                px-10 md:px-14 text-base md:text-lg font-bold leading-8 w-fit">Go back to vans</Link>
-            </div >
-        )
-    }
 
     function handleFilterChange(key, value) {
         setSearchParams(prevParams => {
@@ -37,8 +25,38 @@ const Vans = () => {
         })
     }
 
-    if (error) {
-        return <h1 className="max-w-7xl mx-auto  container p-20 text-2xl font-bold">There was an error: {error.message}</h1>
+    function renderVanElements(vans) {
+        const displayedVans = typefFilter ? vans.filter(van => van.type === typefFilter) : vans;
+
+        if (typefFilter && displayedVans.length === 0) {
+            return (
+                <div className="p-20 flex flex-col gap-5" >
+                    <p className="text-2xl">No vans found for the specified type</p>
+                    <Link to="/vans" className="bg-[#FF8C38] rounded-lg hover:bg-[#f8a56b] py-2 
+                        px-10 md:px-14 text-base md:text-lg font-bold leading-8 w-fit">Go back to vans</Link>
+                </div >
+            )
+        }
+
+        const vansElement =
+            <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {
+                    displayedVans?.map((van) => {
+                        return (
+                            <Link to={van.id} key={van.id} state={{ search: `?${searchParams.toString()}`, type: typefFilter }}>
+                                <VansCard title={van.name} img={van.imageUrl} price={van.price}
+                                    text={van.type.charAt(0).toUpperCase().concat(van.type.slice(1))} />
+                            </Link>
+                        )
+                    })
+                }
+            </div>
+
+        return (
+            <>
+                {vansElement}
+            </>
+        )
     }
 
     return (
@@ -56,18 +74,13 @@ const Vans = () => {
                         {typefFilter ? <button className="flex gap-4 text-[#4D4D4D] text-base sm:text-lg  font-semibold leading-6 underline hover:no-underline" onClick={() => handleFilterChange("type", null)}>Clear fliters</button> : null}
                     </div>
                 </div>
-                <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {
-                        displayedVans?.map((van) => {
-                            return (
-                                <Link to={van.id} key={van.id} state={{ search: `?${searchParams.toString()}`, type: typefFilter }}>
-                                    <VansCard title={van.name} img={van.imageUrl} price={van.price}
-                                        text={van.type.charAt(0).toUpperCase().concat(van.type.slice(1))} />
-                                </Link>
-                            )
-                        })
-                    }
-                </div>
+                <Suspense fallback={<h1 className="pt-10 text-2xl">Loading vans....</h1>}>
+                    <Await resolve={dataPromise.vans}>
+                        {
+                            renderVanElements
+                        }
+                    </Await>
+                </Suspense>
             </div>
         </main>
     );

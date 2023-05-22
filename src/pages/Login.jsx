@@ -1,7 +1,6 @@
 import { useLoaderData, Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { loginUser } from "../api";
 
-
 export function loader({ request }) {
     return new URL(request.url).searchParams.get("message")
 }
@@ -21,14 +20,13 @@ export async function action({ request }) {
     }
 }
 
-
 const Login = () => {
     const errorMessage = useActionData()
     const navigation = useNavigation()
     const message = useLoaderData()
 
     return (
-        <div className="bg-[#FFF7ED] h-full flex flex-col justify-center">
+        <div className="bg-[#FFF7ED] h-full flex flex-col text-center justify-center">
             <div className="gap-10 md:gap-16 mx-auto flex flex-col w-full max-w-2xl items-center px-6">
                 <h1 className="text-[#161616] font-bold text-3xl sm:text-4xl">Sign in to your account</h1>
                 {message && <h2 className="-my-6 text-xl sm:text-2xl text-red-700 font-semibold">{message}</h2>}
@@ -43,7 +41,7 @@ const Login = () => {
                     </button>
                 </Form>
                 <p className="text-lg sm:text-xl">Don’t have an account?
-                    <span className="text-[#FF8C38] cursor-pointer font-semibold">Create one now</span>
+                    <span className="text-[#FF8C38] cursor-pointer font-semibold"> Create one now</span>
                 </p>
             </div>
         </div>

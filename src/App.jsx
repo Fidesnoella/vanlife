@@ -27,13 +27,14 @@ const router = createBrowserRouter(
       <Route path='about' element={<About />} />
       <Route path='vans' element={<Vans />}
         loader={vansLoader} errorElement={<Error />} />
-      <Route path='vans/:id' loader={VanDetailLoader} element={<VanDetail />} />
+      <Route path='vans/:id' loader={VanDetailLoader} element={<VanDetail />}
+        errorElement={<Error />} />
 
       <Route path='host' element={<HostLayout />}>
         <Route index element={<Dashboard />} loader={async ({ request }) => await requireAuth(request)} />
         <Route path='income' element={<Income />} loader={async ({ request }) => await requireAuth(request)} />
-        <Route path='vans' loader={HostVansLoader} element={<HostVans />} />
-        <Route path='vans/:id' loader={HostDetailLoader} element={<VanDetailLayout />}>
+        <Route path='vans' loader={HostVansLoader} element={<HostVans />} errorElement={<Error />} />
+        <Route path='vans/:id' loader={HostDetailLoader} element={<VanDetailLayout />} errorElement={<Error />}>
           <Route index element={<VanInfo />} loader={async ({ request }) => await requireAuth(request)} />
           <Route path='price' element={<VanPrice />} loader={async ({ request }) => await requireAuth(request)} />
           <Route path='photos' element={<VanPhotos />} loader={async ({ request }) => await requireAuth(request)} />

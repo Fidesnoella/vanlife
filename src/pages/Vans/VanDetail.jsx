@@ -1,9 +1,9 @@
 import { Link, useLocation, useLoaderData } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
-import { getVans } from "../../api";
+import { getVan } from "../../api";
 
 export function loader({ params }) {
-    return getVans(params.id)
+    return getVan(params.id)
 }
 
 const VanDetail = () => {
