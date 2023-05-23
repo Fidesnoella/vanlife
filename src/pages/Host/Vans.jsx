@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const Vans = () => {
     const [vans, setVans] = useState([])
 
@@ -17,8 +16,8 @@ const Vans = () => {
                 <h1 className="text-2xl sm:text-3xl font-bold">Your listed vans</h1>
                 <div className="flex flex-col gap-3 mt-6">
                     {
-                        vans.map((van, index) =>
-                            <Link to={van.id} key={index}>
+                        vans.map((van) =>
+                            <Link to={van.id} key={van.id}>
                                 <div className="bg-white text-black p-6 flex flex-col sm:flex-row items-center gap-2">
                                     <img src={van.imageUrl} alt="" className="rounded-md w-24 sm:w-28" />
                                     <div className="flex flex-col gap-1">

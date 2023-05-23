@@ -29,16 +29,6 @@ const Vans = () => {
 
     const displayedVans = typefFilter ? vans.filter(van => van.type === typefFilter) : vans;
 
-    if (typefFilter && displayedVans.length === 0) {
-        return (
-            <div className="p-20 flex flex-col gap-5" >
-                <p className="text-2xl">No vans found for the specified type</p>
-                <Link to="/vans" className="bg-[#FF8C38] rounded-lg hover:bg-[#f8a56b] py-2 
-                px-10 md:px-14 text-base md:text-lg font-bold leading-8 w-fit">Go back to vans</Link>
-            </div >
-        )
-    }
-
     function handleFilterChange(key, value) {
         setSearchParams(prevParams => {
             if (value === null) {

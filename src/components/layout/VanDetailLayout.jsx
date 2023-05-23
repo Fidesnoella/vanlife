@@ -5,15 +5,13 @@ import { FaArrowLeft } from "react-icons/fa"
 
 const VanDetailLayout = () => {
     const params = useParams()
-    const [van, setVan] = useState(null)
+    const [vanData, setVan] = useState(null)
 
     useEffect(() => {
         fetch(`/api/host/vans/${params.id}`)
             .then(response => response.json())
             .then(data => setVan(data.vans))
     }, [params.id])
-
-    const vanData = van ? van[0] : null
 
     return (
         <main className="max-w-7xl mx-auto container px-4 xl:px-0">
