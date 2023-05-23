@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-const HouseLayout = () => {
+const HostLayout = () => {
     return (
         <main className="h-full bg-[#FFF7ED]">
             <div className="bg-[#FFF7ED] py-10 px-4">
@@ -26,4 +26,4 @@ const HouseLayout = () => {
     );
 }
 
-export default HouseLayout;
+export default HostLayout;
